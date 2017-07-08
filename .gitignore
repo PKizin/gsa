@@ -1,0 +1,11 @@
+Gap Soliton Assembler.spec
+.idea/
+result/
+domain/*.pyc
+gui/*.xar
+gui/*.pyc
+gui/dialog_coding/*.pyc
+gui/dialog_log/*.pyc
+gui/dialog_main/*.pyc
+gui/dialog_params/*.pyc
+gui/dialog_plot/*.pyc
