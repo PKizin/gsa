@@ -1,6 +1,7 @@
 Gap Soliton Assembler.spec
 .idea/
-result/
+result/*.csv
+result/*.png
 domain/*.pyc
 gui/*.xar
 gui/*.pyc
