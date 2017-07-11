@@ -1,27 +1,18 @@
 missing module named 'PySide.QtCore' - imported by c:\python27\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_qt4plugins.py
+missing module named fcntl - imported by tempfile, subprocess, pty, IPython.external.pexpect._pexpect
 missing module named org - imported by copy
 missing module named console - imported by pyreadline.console.ansi
 missing module named startup - imported by pyreadline.keysyms.common, pyreadline.keysyms.keysyms
 missing module named System - imported by pyreadline.console.ironpython_console, pyreadline.keysyms.ironpython_keysyms, pyreadline.rlmain, IPython.utils._process_cli, IPython.utils.traitlets
+missing module named pwd - imported by posixpath, getpass, shutil, tarfile, webbrowser, distutils.util, distutils.archive_util, IPython.external.path._path
 missing module named _scproxy - imported by urllib, future.backports.urllib.request
 missing module named EasyDialogs - imported by getpass
 missing module named termios - imported by getpass, tty, IPython.external.pexpect._pexpect, IPython.core.page
-missing module named pwd - imported by posixpath, getpass, shutil, tarfile, webbrowser, distutils.util, distutils.archive_util, IPython.external.path._path
 missing module named SOCKS - imported by ftplib
 missing module named rourl2path - imported by urllib
 missing module named IronPythonConsole - imported by pyreadline.console.ironpython_console
 missing module named clr - imported by pyreadline.console.ironpython_console, pyreadline.clipboard.ironpython_clipboard, IPython.utils._process_cli
 missing module named 'System.Windows' - imported by pyreadline.clipboard.ironpython_clipboard
-missing module named 'org.python' - imported by pickle, setuptools.sandbox, xml.sax
-missing module named fcntl - imported by tempfile, subprocess, pty, IPython.external.pexpect._pexpect
-missing module named riscosenviron - imported by os
-missing module named riscospath - imported by os
-missing module named riscos - imported by os
-missing module named ce - imported by os
-missing module named _emx_link - imported by os
-missing module named os2 - imported by os
-missing module named posix - imported by os
-missing module named resource - imported by posix, IPython.external.pexpect._pexpect, profile, IPython.utils.timing
 missing module named _sysconfigdata - imported by distutils.sysconfig, sysconfig
 missing module named grp - imported by shutil, tarfile, distutils.archive_util
 missing module named pyimod03_importers - imported by c:\python27\lib\site-packages\PyInstaller\loader\rthooks\pyi_rth_pkgres.py
@@ -39,6 +30,7 @@ missing module named 'importlib.machinery' - imported by pkg_resources, IPython.
 missing module named 'pkg_resources.extern.six.moves' - imported by pkg_resources, pkg_resources._vendor.packaging.requirements
 missing module named pkg_resources.extern.six - imported by pkg_resources.extern, pkg_resources
 missing module named _imp - imported by pkg_resources
+missing module named 'org.python' - imported by pickle, setuptools.sandbox, xml.sax
 missing module named 'java.lang' - imported by platform, xml.sax._exceptions
 missing module named _xmlplus - imported by xml
 missing module named 'Carbon.File' - imported by plistlib
@@ -140,6 +132,7 @@ missing module named _imaging_gif - imported by PIL.GifImagePlugin
 missing module named PySide - imported by matplotlib.backends.qt_compat
 missing module named 'tornado.template' - imported by matplotlib.backends.backend_webagg
 missing module named sgi - imported by pty
+missing module named resource - imported by posix, IPython.external.pexpect._pexpect, profile, IPython.utils.timing
 missing module named pexpect - imported by IPython.external.pexpect
 missing module named simplegeneric - imported by IPython.external.simplegeneric
 missing module named 'coverage.html' - imported by IPython.testing.iptestcontroller
@@ -193,3 +186,10 @@ missing module named wx - imported by matplotlib.pyplot, IPython.lib.inputhook, 
 missing module named matplotlib.tri.Triangulation - imported by matplotlib.tri, matplotlib.tri.trifinder, matplotlib.tri.tritools, matplotlib.tri.triinterpolate, matplotlib.mlab
 missing module named 'mpl_toolkits.natgrid' - imported by matplotlib.mlab
 missing module named matplotlib.axes.Axes - imported by matplotlib.axes, matplotlib.legend, matplotlib.projections.geo, matplotlib.projections.polar, matplotlib.pyplot, matplotlib.figure
+missing module named riscosenviron - imported by os
+missing module named riscospath - imported by os
+missing module named riscos - imported by os
+missing module named ce - imported by os
+missing module named _emx_link - imported by os
+missing module named os2 - imported by os
+missing module named posix - imported by os
