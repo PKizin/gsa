@@ -1,6 +1,8 @@
+import os
 import sys
 import time
 from emitting_stream import EmittingStream
+from domain.gslib import GSParams as Params
 
 from PyQt4 import QtCore, QtGui
 from ui_dialog_log import Ui_dialogLog
@@ -9,15 +11,23 @@ from ui_dialog_log import Ui_dialogLog
 class DialogLog(QtGui.QDialog, Ui_dialogLog):
     def __init__(self, parent=None):
         QtGui.QDialog.__init__(self, parent)
-        flags = QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint
+        flags = QtCore.Qt.Tool
         self.setWindowFlags(flags)
         self.stream = EmittingStream()
         self.start()
 
     def start(self):
         self.setupUi(self)
+        self.progressBarStatus.setValue(0)
         self.stream.textWritten.connect(self.on_write_to_console)
         sys.stdout = self.stream
+
+        path = Params.path
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
+                       path + '\gui\solitonIcon.png')),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
 
     def on_opened(self):
         self.show()

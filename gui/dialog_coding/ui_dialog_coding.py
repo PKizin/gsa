@@ -40,6 +40,7 @@ class Ui_dialogCoding(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("../solitonIcon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         dialogCoding.setWindowIcon(icon)
+        dialogCoding.setSizeGripEnabled(True)
         self.gridLayout_2 = QtGui.QGridLayout(dialogCoding)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout()

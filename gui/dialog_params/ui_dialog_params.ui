@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>361</width>
+    <width>475</width>
     <height>422</height>
    </rect>
   </property>
@@ -16,6 +16,9 @@
   <property name="windowIcon">
    <iconset>
     <normaloff>../solitonIcon.png</normaloff>../solitonIcon.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -120,7 +123,7 @@
           <item row="12" column="0">
            <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>initial strip</string>
+             <string>initial interval of scanning</string>
             </property>
            </widget>
           </item>
@@ -310,13 +313,6 @@
             </property>
            </widget>
           </item>
-          <item row="11" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>scanning step 2</string>
-            </property>
-           </widget>
-          </item>
           <item row="10" column="1">
            <widget class="QDoubleSpinBox" name="spinBox_fi">
             <property name="decimals">
@@ -339,7 +335,7 @@
           <item row="10" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
-             <string>scanning step 1</string>
+             <string>step for rough scanning of h-strip</string>
             </property>
            </widget>
           </item>
@@ -356,7 +352,7 @@
           <item row="9" column="0">
            <widget class="QLabel" name="label_6">
             <property name="text">
-             <string>gmpy2 precision</string>
+             <string>gmpy2 bits</string>
             </property>
            </widget>
           </item>
@@ -390,6 +386,13 @@
             </property>
             <property name="singleStep">
              <double>0.001000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>step for robust scanning of h-strip</string>
             </property>
            </widget>
           </item>

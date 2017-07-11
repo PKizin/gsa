@@ -29,6 +29,7 @@ class GSParams:
     right_tail = 3                  # number of zero wells from the right
     thread_state = False            # thread controller
     v0 = 3.0                        # parameter V0
+    path = os.getcwd()              # path to working directory
 
     @staticmethod
     def get_h():
@@ -553,13 +554,13 @@ class GSCoding:
         GSConst.update()
         GSGrid.update()
 
-        GSWriter.print_info('.' * 170)
+        GSWriter.print_info('.' * 165)
         bracket_code = ''.join(code)
         for ch in GSParams.alphabet:
             if len(ch) > 1:
                 bracket_code = bracket_code.replace(ch, '(' + ch + ')')
         GSWriter.print_info('Soliton ' + bracket_code + ' will be assembled')
-        GSWriter.print_info('.' * 170)
+        GSWriter.print_info('.' * 165)
 
         h = GSParams.get_h()
         c0 = GSConst.c[0]
@@ -571,7 +572,7 @@ class GSCoding:
         if not GSParams.thread_state:
             GSWriter.print_fail('Computation has been stopped')
             return 0
-        GSWriter.print_info('.' * 170)
+        GSWriter.print_info('.' * 165)
 
         n = 2
         r = '00'
@@ -598,7 +599,7 @@ class GSCoding:
                 sign *= -1
 
             r += ch
-            GSWriter.print_info('.' * 170)
+            GSWriter.print_info('.' * 165)
 
         r = r[1:]
 
@@ -713,7 +714,8 @@ class GSWriter:
     @staticmethod
     def save_csv(x, y, s):
         gap = GSParams.gap
-        filename = os.getcwd() + '/result/gap' + str(gap) + '   ' + s + '.csv'
+        path = GSParams.path + '\\result\\'
+        filename = path + 'gap' + str(gap) + '   ' + s + '.csv'
         with open(filename, 'w') as csv_file:
             wr = csv.writer(csv_file, delimiter=';', lineterminator='\n')
             for xy in zip(x, y):
@@ -723,7 +725,7 @@ class GSWriter:
     def save_figure(x, y, s):
         n = len(s) - 1
 
-        GSWriter.fig.set_size_inches(8, 4)
+        GSWriter.fig.set_size_inches(7, 3)
 
         GSWriter.fig.patch.set_facecolor('b')
         GSWriter.fig.patch.set_alpha(0.0)
@@ -745,8 +747,8 @@ class GSWriter:
         GSWriter.ax.xaxis.tick_bottom()
         GSWriter.ax.yaxis.tick_left()
 
-        GSWriter.ax.set_xlabel(r'$x$', fontsize=30)
-        GSWriter.ax.set_ylabel(r'$u$', fontsize=30, rotation='horizontal')
+        GSWriter.ax.set_xlabel(r'$x$', fontsize=24)
+        GSWriter.ax.set_ylabel(r'$u$', fontsize=24, rotation='horizontal')
         GSWriter.ax.yaxis.set_label_coords(-0.075, 0.45)
 
         GSWriter.ax.patch.set_facecolor((0.992, 0.917, 0.739))
@@ -760,7 +762,8 @@ class GSWriter:
         GSWriter.fig.tight_layout(pad=0.4)
 
         gap = GSParams.gap
-        filename = os.getcwd() + '/result/gap' + str(gap) + '   ' + s + '.png'
+        path = GSParams.path + '\\result\\'
+        filename = path + 'gap' + str(gap) + '   ' + s + '.png'
 
         if os.path.exists(filename):
             os.remove(filename)

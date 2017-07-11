@@ -1,3 +1,4 @@
+import os
 from gmpy2 import const_pi as pi
 from domain.gslib import GSParams as Params
 
@@ -8,7 +9,7 @@ from ui_dialog_params import Ui_dialogParams
 class DialogParams(QtGui.QDialog, Ui_dialogParams):
     def __init__(self, parent=None):
         QtGui.QDialog.__init__(self, parent)
-        flags = QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint
+        flags = QtCore.Qt.Tool
         self.setWindowFlags(flags)
         self.start()
 
@@ -17,6 +18,13 @@ class DialogParams(QtGui.QDialog, Ui_dialogParams):
         self.buttonParamsOK.clicked.connect(self.on_closed)
         self.spinBox_n.valueChanged.connect(self.on_n_value_changed)
         self.spinBox_m.valueChanged.connect(self.on_m_value_changed)
+
+        path = Params.path
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
+                       path + '\gui\solitonIcon.png')),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
 
     def on_opened(self):
         self.spinBoxMu.setValue(Params.mu)

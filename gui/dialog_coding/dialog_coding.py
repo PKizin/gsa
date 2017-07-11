@@ -8,7 +8,7 @@ from domain.gslib import GSParams as Params
 class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
     def __init__(self, parent=None):
         QtGui.QDialog.__init__(self, parent)
-        flags = QtCore.Qt.WindowSystemMenuHint | QtCore.Qt.WindowTitleHint
+        flags = QtCore.Qt.Tool
         self.setWindowFlags(flags)
         self.code_type = 2
         self.start()
@@ -23,6 +23,14 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
         self.radioCoding3.clicked.connect(self.on_custom_clicked)
         self.buttonCodingOK.clicked.connect(self.on_closed)
         self.editCode.installEventFilter(self)
+
+        path = Params.path
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
+                       path + '\gui\solitonIcon.png')),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(icon)
+        self.update_image()
 
     def update_image(self):
         if Params.gap == 1:
@@ -49,7 +57,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label3Gap1.setText(str(Params.alphabet[2]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    os.path.dirname(sys.argv[0]) + "/gui/components1.png")))
+                    Params.path + '\gui\components1.png')))
 
         if Params.gap == 2:
             self.label1Gap1.setVisible(False)
@@ -77,7 +85,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label5Gap2.setText(str(Params.alphabet[4]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    os.path.dirname(sys.argv[0]) + "/gui/components2.png")))
+                    Params.path + '\gui\components2.png')))
 
         if Params.gap == 3:
             self.label1Gap1.setVisible(False)
@@ -107,7 +115,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label7Gap3.setText(str(Params.alphabet[6]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    os.path.dirname(sys.argv[0]) + "/gui/components3.png")))
+                    Params.path + '\gui\components3.png')))
 
     def update_alphabet(self):
         Params.alphabet = str(self.editCode.text()).split(', ')

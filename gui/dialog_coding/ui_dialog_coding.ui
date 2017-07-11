@@ -54,6 +54,9 @@
    <iconset>
     <normaloff>../solitonIcon.png</normaloff>../solitonIcon.png</iconset>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="10">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
