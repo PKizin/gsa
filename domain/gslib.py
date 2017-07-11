@@ -16,20 +16,26 @@ class GSParams:
     def __init__(self):
         pass
 
-    alphabet = ['-1', '0', '+1']    # coding alphabet
+    gap = 1                                         # number of gap
+    alphabet = ['-1', '0', '+1']                    # coding alphabet
+    code = ['0', '0', '0', '+1', '0', '0', '0']     # code to be computed
+
+    frequency = 32                  # number of nodes in one periodic well
+    periods = 10                    # number of periodic wells
+    mu = 1.0                        # parameter mu
+    v0 = 3.0                        # parameter V0
+    left_tail = 3                   # number of zero wells from the left
+    right_tail = 3                  # number of zero wells from the right
+
     bits = 400                      # precision for gmpy2 library
     find_inf_step = 0.001           # fixed step in GSCoding.find_strip method
     find_gap_step = 0.001           # fixed step in GSCoding.find_strip method
-    frequency = 32                  # number of nodes in one periodic well
-    gap = 1                         # number of gap
-    initial_strip = 1               # boundary for initial search [-initial_strip; initial_strip]
-    left_tail = 3                   # number of zero wells from the left
-    mu = 1.0                        # parameter mu
-    periods = 10                    # number of periodic wells
-    right_tail = 3                  # number of zero wells from the right
+    initial_strip = 1.0             # boundary for initial search [-initial_strip; initial_strip]
+
     thread_state = False            # thread controller
-    v0 = 3.0                        # parameter V0
     path = os.getcwd()              # path to working directory
+    progress = 0                    # progress of computation (0-100)
+    status = 'Unknown'              # status of computation
 
     @staticmethod
     def get_h():
@@ -397,6 +403,7 @@ class GSCoding:
             else:
                 msg = 'Strip H_{' + code + ch2 + '}'
             GSWriter.print_strip(msg, a, b)
+            GSWriter.update_progress()
 
             l = b
             result.append(a)
@@ -550,17 +557,23 @@ class GSCoding:
 
     @staticmethod
     def make_state(code):
-        GSParams.update()
-        GSConst.update()
-        GSGrid.update()
-
+        GSParams.code = code
+        GSParams.progress = 0
+        GSParams.status = 'Initializing parameters'
         GSWriter.print_info('.' * 165)
         bracket_code = ''.join(code)
         for ch in GSParams.alphabet:
             if len(ch) > 1:
                 bracket_code = bracket_code.replace(ch, '(' + ch + ')')
         GSWriter.print_info('Soliton ' + bracket_code + ' will be assembled')
+        GSWriter.update_progress()
+
+        GSParams.update()
+        GSConst.update()
+        GSGrid.update()
         GSWriter.print_info('.' * 165)
+        GSWriter.update_progress()
+        GSParams.status = 'Computing h-strips'
 
         h = GSParams.get_h()
         c0 = GSConst.c[0]
@@ -603,11 +616,15 @@ class GSCoding:
 
         r = r[1:]
 
+        GSParams.status = 'Computing stable manifold'
         n = len(code)
         b = GSCoding.reach_stable_manifold(b[len(alphabet) - 1], b[len(alphabet)], n)
         if not GSParams.thread_state:
             GSWriter.print_fail('Computation has been stopped')
             return 0, 0
+        GSWriter.print_info('.' * 165)
+        GSWriter.update_progress()
+        GSParams.status = 'Saving data'
 
         p, j = GSCalcAdvanced.monodromy_maxabs(h)
         n = len(code) - 1
@@ -619,6 +636,8 @@ class GSCoding:
         GSWriter.save_csv(x, y, r)
         GSWriter.save_figure(x, y, r)
 
+        GSParams.progress = 100
+        GSParams.status = 'Computation has been finished'
         GSParams.thread_state = False
         GSWriter.print_success('Soliton ' + r + ' has been successfully assembled')
         return [x, y]
@@ -770,3 +789,7 @@ class GSWriter:
 
         plt.savefig(filename, dpi=100, facecolor=GSWriter.fig.get_facecolor(), edgecolor='none')
         GSWriter.ax.lines[0].remove()
+
+    @staticmethod
+    def update_progress():
+        GSParams.progress += round(100.0 / float(len(GSParams.code) * (2*GSParams.gap + 1) + 4))

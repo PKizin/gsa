@@ -19,7 +19,9 @@ class DialogLog(QtGui.QDialog, Ui_dialogLog):
     def start(self):
         self.setupUi(self)
         self.progressBarStatus.setValue(0)
+        self.reset_progress_bar()
         self.stream.textWritten.connect(self.on_write_to_console)
+        self.stream.textWritten.connect(self.on_progress_bar_updated)
         sys.stdout = self.stream
 
         path = Params.path
@@ -36,6 +38,10 @@ class DialogLog(QtGui.QDialog, Ui_dialogLog):
 
     def on_closed(self):
         self.close()
+
+    def reset_progress_bar(self):
+        self.labelStatus.setText('Status unknown')
+        self.progressBarStatus.setValue(0)
 
     solitonAssembled = QtCore.pyqtSignal()
 
@@ -121,3 +127,9 @@ class DialogLog(QtGui.QDialog, Ui_dialogLog):
         if msg_list[0] == '<success>':
             time.sleep(1)
             self.solitonAssembled.emit()
+
+    def on_progress_bar_updated(self):
+        self.labelStatus.setText(Params.status)
+        self.progressBarStatus.setValue(Params.progress)
+        self.progressBarStatus.setFocus()
+        self.progressBarStatus.repaint()

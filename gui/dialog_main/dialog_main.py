@@ -218,6 +218,8 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
 
     def on_button_compute_clicked(self):
         self.dialog_log.on_opened()
+        self.dialog_log.reset_progress_bar()
+
         s = str(self.editCode.text())
         for i in range(Params.left_tail):
             s = '0' + s
