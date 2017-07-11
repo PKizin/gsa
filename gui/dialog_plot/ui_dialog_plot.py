@@ -36,6 +36,11 @@ class Ui_dialogPlot(object):
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.gridLayout_4 = QtGui.QGridLayout()
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
+        self.line = QtGui.QFrame(dialogPlot)
+        self.line.setFrameShape(QtGui.QFrame.HLine)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
+        self.gridLayout_4.addWidget(self.line, 2, 0, 1, 1)
         self.gridLayout_3 = QtGui.QGridLayout()
         self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -63,7 +68,7 @@ class Ui_dialogPlot(object):
         self.imagePlot.setPixmap(QtGui.QPixmap(_fromUtf8("../../result/0+0.png")))
         self.imagePlot.setScaledContents(True)
         self.imagePlot.setObjectName(_fromUtf8("imagePlot"))
-        self.gridLayout_4.addWidget(self.imagePlot, 2, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.imagePlot, 3, 0, 1, 1)
         self.label_2 = QtGui.QLabel(dialogPlot)
         self.label_2.setText(_fromUtf8(""))
         self.label_2.setObjectName(_fromUtf8("label_2"))
@@ -76,7 +81,7 @@ class Ui_dialogPlot(object):
 
     def retranslateUi(self, dialogPlot):
         dialogPlot.setWindowTitle(_translate("dialogPlot", "Plot", None))
-        self.label.setText(_translate("dialogPlot", "File", None))
+        self.label.setText(_translate("dialogPlot", "Gap soliton", None))
 
 
 if __name__ == "__main__":
