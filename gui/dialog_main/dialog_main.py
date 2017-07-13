@@ -30,17 +30,17 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
         path = Params.path
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
-                       path + '\gui\solitonIcon.png')),
+                       path + '/gui/solitonIcon.png')),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         dialog_main.setWindowIcon(icon)
 
-        self.imageSymbol1.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_-.png')))
-        self.imageSymbol2.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_0.png')))
-        self.imageSymbol3.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_+.png')))
-        self.imageSymbol4.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_^.png')))
-        self.imageSymbol5.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_v.png')))
-        self.imageSymbol6.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_r.png')))
-        self.imageSymbol7.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '\gui\solitons_l.png')))
+        self.imageSymbol1.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_-.png')))
+        self.imageSymbol2.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_0.png')))
+        self.imageSymbol3.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_+.png')))
+        self.imageSymbol4.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_^.png')))
+        self.imageSymbol5.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_v.png')))
+        self.imageSymbol6.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_r.png')))
+        self.imageSymbol7.setPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(path + '/gui/solitons_l.png')))
 
         self.actionParams.triggered.connect(self.dialog_params.on_opened)
         self.actionCoding.triggered.connect(self.dialog_coding.on_opened)

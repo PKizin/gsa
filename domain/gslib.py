@@ -666,7 +666,7 @@ class GSCoding:
                 vl = y
                 cur_norm = GSCalc.abs(vl[0]/v1[0] - vl[1]/v1[1])
 
-                if cur_norm < GSConst.e_[20]:
+                if cur_norm < GSConst.e_[6]:
                     return p
                 if cur_norm < min_norm:
                     min_norm = cur_norm
@@ -772,8 +772,8 @@ class GSWriter:
         GSWriter.ax.patch.set_facecolor((0.992, 0.917, 0.739))
         GSWriter.ax.patch.set_alpha(1.0)
 
-        m = float(str(GSCalc.max(GSCalc.abs(GSCalc.min(*y)), GSCalc.abs(GSCalc.max(*y)))))
-        xlim(float(str(x[0])), float(str(x[-1])))
+        m = float(GSCalc.max(GSCalc.abs(GSCalc.min(*y)), GSCalc.abs(GSCalc.max(*y))))
+        xlim(float(x[0]), float(x[-1]))
         ylim(-1.2 * m, 1.2 * m)
         plot(x, y, color=(0.5, 0, 0.5), linewidth=4)
 

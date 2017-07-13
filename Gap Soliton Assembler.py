@@ -14,5 +14,7 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = DialogMain()
     ui.start(MainWindow)
+    MainWindow.move(QtGui.QApplication.desktop().screen().rect().center() -
+                    MainWindow.rect().center())
     MainWindow.show()
     sys.exit(app.exec_())
