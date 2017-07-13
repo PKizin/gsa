@@ -130,6 +130,6 @@ class DialogLog(QtGui.QDialog, Ui_dialogLog):
 
     def on_progress_bar_updated(self):
         self.labelStatus.setText(Params.status)
-        self.progressBarStatus.setValue(Params.progress)
+        self.progressBarStatus.setValue(round(Params.progress))
         self.progressBarStatus.setFocus()
         self.progressBarStatus.repaint()

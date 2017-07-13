@@ -851,12 +851,11 @@
     <property name="title">
      <string>About</string>
     </property>
-    <addaction name="actionAbout"/>
-    <addaction name="actionAbout_parameters"/>
+    <addaction name="actionDoc"/>
    </widget>
    <widget class="QMenu" name="menuResults">
     <property name="title">
-     <string>Results</string>
+     <string>Result</string>
     </property>
     <addaction name="actionLog"/>
     <addaction name="actionPlot"/>
@@ -876,9 +875,9 @@
     <string>Numerical computation</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="actionDoc">
    <property name="text">
-    <string>About program</string>
+    <string>Documentation</string>
    </property>
   </action>
   <action name="actionAbout_parameters">

@@ -34,7 +34,7 @@ class GSParams:
 
     thread_state = False            # thread controller
     path = os.getcwd()              # path to working directory
-    progress = 0                    # progress of computation (0-100)
+    progress = 0.0                  # progress of computation (0.0 - 100.0)
     status = 'Unknown'              # status of computation
 
     @staticmethod
@@ -215,40 +215,38 @@ class GSCalcAdvanced:
             return [[[v22, v21], [v12, v11]], [l2, l1]]
 
     @staticmethod
-    def monodromy_maxabs(h):
+    def monodromy_maxabs():
         e1 = [GSConst.c[1], GSConst.c[0]]
         e2 = [GSConst.c[0], GSConst.c[1]]
 
-        v1 = GSCalcAdvanced.runge_linear(e1, [GSConst.c[0], GSConst.pi], h)
-        v2 = GSCalcAdvanced.runge_linear(e2, [GSConst.c[0], GSConst.pi], h)
+        v1 = GSCalcAdvanced.runge_linear(e1, [GSConst.c[0], GSConst.pi])
+        v2 = GSCalcAdvanced.runge_linear(e2, [GSConst.c[0], GSConst.pi])
 
         m1 = [v1[0][-1], v1[1][-1]]
         m2 = [v2[0][-1], v2[1][-1]]
 
         p, j = GSCalcAdvanced.eig2([m1, m2])
 
-        if abs(j[0]) > abs(j[1]):
-            return [p[0], j[0]]
-        else:
-            return [p[1], j[1]]
-
-    @staticmethod
-    def monodromy_simple(h):
-        e1 = [GSConst.c[1], GSConst.c[0]]
-        e2 = [GSConst.c[0], GSConst.c[1]]
-
-        v1 = GSCalcAdvanced.runge_linear(e1, [GSConst.c[0], GSConst.pi], h)
-        v2 = GSCalcAdvanced.runge_linear(e2, [GSConst.c[0], GSConst.pi], h)
-
-        m1 = [v1[0][-1], v1[1][-1]]
-        m2 = [v2[0][-1], v2[0][-1]]
-
-        p, j = GSCalcAdvanced.eig2([m1, m2])
-
         return [p[1], j[1]]
 
     @staticmethod
-    def runge_full(v0, t, h):
+    def monodromy_minabs():
+        e1 = [GSConst.c[1], GSConst.c[0]]
+        e2 = [GSConst.c[0], GSConst.c[1]]
+
+        v1 = GSCalcAdvanced.runge_linear(e1, [GSConst.c[0], GSConst.pi])
+        v2 = GSCalcAdvanced.runge_linear(e2, [GSConst.c[0], GSConst.pi])
+
+        m1 = [v1[0][-1], v1[1][-1]]
+        m2 = [v2[0][-1], v2[1][-1]]
+
+        p, j = GSCalcAdvanced.eig2([m1, m2])
+
+        return [p[0], j[0]]
+
+    @staticmethod
+    def runge_full(v0, t):
+        h = GSParams.get_h()
         n = int(GSCalc.abs(t[1] - t[0]) / GSCalc.abs(h)) + 1
 
         mu = GSParams.get_mu()
@@ -295,7 +293,8 @@ class GSCalcAdvanced:
         return [y1, y2]
 
     @staticmethod
-    def runge_linear(v0, t, h):
+    def runge_linear(v0, t):
+        h = GSParams.get_h()
         n = int(GSCalc.abs(t[1] - t[0]) / GSCalc.abs(h)) + 1
 
         mu = GSParams.get_mu()
@@ -337,7 +336,8 @@ class GSCalcAdvanced:
         return [y1, y2]
 
     @staticmethod
-    def runge_short(v0, t, h):
+    def runge_short(v0, t):
+        h = GSParams.get_h()
         n = int(GSCalc.abs(t[1] - t[0]) / GSCalc.abs(h)) + 1
         m = int(GSCalc.abs(t[1] - t[0]) / GSCalc.abs(pi())) - 1
         c2 = GSConst.c[2]
@@ -421,8 +421,8 @@ class GSCoding:
         count = 0
         h = GSParams.get_h()
 
-        v0, j = GSCalcAdvanced.monodromy_maxabs(h)
-        y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi], h)
+        v0, j = GSCalcAdvanced.monodromy_maxabs()
+        y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi])
         m0 = y[0]
 
         is_enter = 0
@@ -431,7 +431,7 @@ class GSCoding:
         while GSCalc.abs(M - GSCalc.abs(m)) > eps:
             p0 = p0+hp
 
-            y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi], h)
+            y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi])
             if not GSParams.thread_state:
                 return
 
@@ -478,9 +478,9 @@ class GSCoding:
         n = int(n)
         h = GSParams.get_h()
 
-        v0, j = GSCalcAdvanced.monodromy_maxabs(h)
+        v0, j = GSCalcAdvanced.monodromy_maxabs()
 
-        y = GSCalcAdvanced.runge_short(GSCalc.mul(p0 + hp*hp*hp, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi], h)
+        y = GSCalcAdvanced.runge_short(GSCalc.mul(p0 + hp*hp*hp, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi])
         m0 = y[0]
 
         is_inf = 1
@@ -491,7 +491,7 @@ class GSCoding:
         while GSCalc.abs(M - GSCalc.abs(m)) > eps:
             p0 += hp
 
-            y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi], h)
+            y = GSCalcAdvanced.runge_short(GSCalc.mul(p0, v0), [GSConst.c[0], GSConst.c[n] * GSConst.pi])
             if not GSParams.thread_state:
                 return -1, ''
 
@@ -590,8 +590,8 @@ class GSCoding:
         n = 2
         r = '00'
         for ch in code[1:]:
-            v0, j = GSCalcAdvanced.monodromy_maxabs(h)
-            y = GSCalcAdvanced.runge_short(GSCalc.mul(b[-1], v0), [c0, GSConst.c[n] * GSConst.pi], h)
+            v0, j = GSCalcAdvanced.monodromy_maxabs()
+            y = GSCalcAdvanced.runge_short(GSCalc.mul(b[-1], v0), [c0, GSConst.c[n] * GSConst.pi])
             n += 1
 
             keys = alphabet
@@ -626,9 +626,9 @@ class GSCoding:
         GSWriter.update_progress()
         GSParams.status = 'Saving data'
 
-        p, j = GSCalcAdvanced.monodromy_maxabs(h)
+        p, j = GSCalcAdvanced.monodromy_maxabs()
         n = len(code) - 1
-        y = GSCalcAdvanced.runge_full(GSCalc.mul(b, p), [c0, GSConst.c[n] * GSConst.pi], h)
+        y = GSCalcAdvanced.runge_full(GSCalc.mul(b, p), [c0, GSConst.c[n] * GSConst.pi])
 
         x = GSCalc.lin_space(c0, GSConst.c[n] * GSConst.pi, h)
         y = y[0]
@@ -645,11 +645,10 @@ class GSCoding:
     @staticmethod
     def reach_stable_manifold(p0, p1, n):
         GSWriter.print_info('Reaching stable manifold')
-        h = GSParams.get_h()
         n = int(n)
 
-        v1, j1 = GSCalcAdvanced.monodromy_simple(h)
-        v2, j2 = GSCalcAdvanced.monodromy_maxabs(h)
+        v1, j1 = GSCalcAdvanced.monodromy_minabs()
+        v2, j2 = GSCalcAdvanced.monodromy_maxabs()
 
         i = GSConst.e_[3]
         while 1:
@@ -660,14 +659,14 @@ class GSCoding:
             GSWriter.print_asympt(p0, p1, hp)
 
             for p in GSCalc.lin_space(p0, p1, hp):
-                y = GSCalcAdvanced.runge_short(GSCalc.mul(p, v2), [0, GSConst.c[n] * GSConst.pi], h)
+                y = GSCalcAdvanced.runge_short(GSCalc.mul(p, v2), [0, GSConst.c[n] * GSConst.pi])
                 if not GSParams.thread_state:
                     return -1
 
                 vl = y
                 cur_norm = GSCalc.abs(vl[0]/v1[0] - vl[1]/v1[1])
 
-                if cur_norm < GSConst.e_[6]:
+                if cur_norm < GSConst.e_[20]:
                     return p
                 if cur_norm < min_norm:
                     min_norm = cur_norm
@@ -792,4 +791,4 @@ class GSWriter:
 
     @staticmethod
     def update_progress():
-        GSParams.progress += round(100.0 / float(len(GSParams.code) * (2*GSParams.gap + 1) + 4))
+        GSParams.progress += 100.0 / float(len(GSParams.code) * (2*GSParams.gap + 1) + 4)

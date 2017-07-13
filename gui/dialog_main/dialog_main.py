@@ -23,8 +23,6 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
         self.code_validator = CodeValidator()
         self.code_length = 1
         self.code_thread = Thread(target=Coder.make_state, args=('', '', ))
-        pid = '0.0.0.1'
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(pid)
 
     def start(self, dialog_main):
         self.setupUi(dialog_main)
@@ -48,6 +46,7 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
         self.actionCoding.triggered.connect(self.dialog_coding.on_opened)
         self.actionLog.triggered.connect(self.dialog_log.on_opened)
         self.actionPlot.triggered.connect(self.dialog_plot.on_opened)
+        self.actionDoc.triggered.connect(self.on_action_doc_clicked)
 
         self.dialog_log.solitonAssembled.connect(self.dialog_plot.on_opened)
 
@@ -262,3 +261,6 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
         if Params.thread_state:
             Params.thread_state = False
             self.code_thread.join()
+
+    def on_action_doc_clicked(self):
+        os.startfile(Params.path + '\\gsa_doc.chm')
