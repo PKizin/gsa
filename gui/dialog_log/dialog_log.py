@@ -27,11 +27,13 @@ class DialogLog(QtGui.QDialog, Ui_dialogLog):
         path = Params.path
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
-                       path + '\gui\solitonIcon.png')),
+                       path + '/gui/solitonIcon.png')),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)
 
     def on_opened(self):
+        self.move(QtGui.QApplication.desktop().screen().rect().center() -
+                  self.rect().center())
         self.show()
         self.activateWindow()
         self.setFocus()

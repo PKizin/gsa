@@ -22,7 +22,7 @@ class DialogParams(QtGui.QDialog, Ui_dialogParams):
         path = Params.path
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
-                       path + '\gui\solitonIcon.png')),
+                       path + '/gui/solitonIcon.png')),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)
 
@@ -41,6 +41,8 @@ class DialogParams(QtGui.QDialog, Ui_dialogParams):
         self.spinBox_fg.setValue(Params.find_gap_step)
         self.spinBox_strip.setValue(Params.initial_strip)
 
+        self.move(QtGui.QApplication.desktop().screen().rect().center() -
+                  self.rect().center())
         self.show()
         self.activateWindow()
         self.setFocus()

@@ -732,7 +732,7 @@ class GSWriter:
     @staticmethod
     def save_csv(x, y, s):
         gap = GSParams.gap
-        path = GSParams.path + '\\result\\'
+        path = GSParams.path + '/result/'
         filename = path + 'gap' + str(gap) + '   ' + s + '.csv'
         with open(filename, 'w') as csv_file:
             wr = csv.writer(csv_file, delimiter=';', lineterminator='\n')
@@ -780,7 +780,7 @@ class GSWriter:
         GSWriter.fig.tight_layout(pad=0.4)
 
         gap = GSParams.gap
-        path = GSParams.path + '\\result\\'
+        path = GSParams.path + '/result/'
         filename = path + 'gap' + str(gap) + '   ' + s + '.png'
 
         if os.path.exists(filename):

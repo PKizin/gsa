@@ -27,7 +27,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
         path = Params.path
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(QtCore.QString.fromUtf8(
-                       path + '\gui\solitonIcon.png')),
+                       path + '/gui/solitonIcon.png')),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)
         self.update_image()
@@ -57,7 +57,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label3Gap1.setText(str(Params.alphabet[2]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    Params.path + '\gui\components1.png')))
+                    Params.path + '/gui/components1.png')))
 
         if Params.gap == 2:
             self.label1Gap1.setVisible(False)
@@ -85,7 +85,7 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label5Gap2.setText(str(Params.alphabet[4]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    Params.path + '\gui\components2.png')))
+                    Params.path + '/gui/components2.png')))
 
         if Params.gap == 3:
             self.label1Gap1.setVisible(False)
@@ -115,12 +115,14 @@ class DialogCoding(QtGui.QDialog, Ui_dialogCoding):
             self.label7Gap3.setText(str(Params.alphabet[6]))
             self.imageComponents.setPixmap(QtGui.QPixmap(
                 QtCore.QString.fromUtf8(
-                    Params.path + '\gui\components3.png')))
+                    Params.path + '/gui/components3.png')))
 
     def update_alphabet(self):
         Params.alphabet = str(self.editCode.text()).split(', ')
 
     def on_opened(self):
+        self.move(QtGui.QApplication.desktop().screen().rect().center() -
+                  self.rect().center())
         self.show()
         self.activateWindow()
         self.setFocus()
