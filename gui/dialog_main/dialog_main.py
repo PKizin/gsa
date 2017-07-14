@@ -263,4 +263,4 @@ class DialogMain(QtGui.QDialog, Ui_dialogMain):
             self.code_thread.join()
 
     def on_action_doc_clicked(self):
-        os.startfile(Params.path + '\\gsa_doc.chm')
+        os.startfile(Params.path + '/gsa_doc.chm')
